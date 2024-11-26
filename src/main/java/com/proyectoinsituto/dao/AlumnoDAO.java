@@ -1,7 +1,5 @@
 package com.proyectoinsituto.dao;
-
 import java.util.List;
-
 import com.proyectoinsituto.entidades.AlumnoEntidad;
 
 public interface AlumnoDAO {
@@ -9,5 +7,6 @@ public interface AlumnoDAO {
     public AlumnoEntidad obtenerAlumnoPorId(String id);
     public List<AlumnoEntidad> obtenerTodosLosAlumnos();
     public boolean actualizarAlumno(AlumnoEntidad alumno);
-    public void eliminarAlumno(String id);
+    public boolean eliminarAlumno(String id);
+    public List<String> obtenerModulosPorId();
 }

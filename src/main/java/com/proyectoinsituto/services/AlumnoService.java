@@ -74,7 +74,6 @@ public class AlumnoService {
                 alumnoDTO.getApellidoAlumno(),
                 calcularEdadAFecha(alumnoDTO.getEdad()),
                 alumnoDTO.getGrupo());
-
        if(AlumnoDAOImplementacion.getInstancia(dataSource).actualizarAlumno(alumnoEntidad)){
             return true;
        } else {
@@ -82,6 +81,29 @@ public class AlumnoService {
        }
     }
 
+    public boolean eliminarAlumno (String id){
+       return AlumnoDAOImplementacion.getInstancia(dataSource).eliminarAlumno(id);
+    }
+
+    private AlumnoEntidad mapearDtoAEntidad (AlumnoDTO alumnoDTO){
+     AlumnoEntidad alumnoEntidad = new AlumnoEntidad(
+        alumnoDTO.getIdAlumno(), 
+        alumnoDTO.getNombreAlumno(), 
+        alumnoDTO.getApellidoAlumno(), 
+        calcularEdadAFecha(alumnoDTO.getEdad()),
+        alumnoDTO.getGrupo());
+        return alumnoEntidad;
+    }
+
+    private AlumnoDTO mapearEntidadADto (AlumnoEntidad alumnoEntidad){
+    AlumnoDTO alumnoDTO = new AlumnoDTO(
+        alumnoEntidad.getCodAlumno(),
+        alumnoEntidad.getNombreAlumno(),
+        alumnoEntidad.getApellidoAlumno(),
+        calcularFechaAEdad(alumnoEntidad.getFechaNacimiento()),
+        alumnoEntidad.getGrupo());
+        return alumnoDTO;
+    }
 
     private int calcularFechaAEdad(Date fechaNacimiento){
         LocalDate fechaNacimientoLocal = fechaNacimiento.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();

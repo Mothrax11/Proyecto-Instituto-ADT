@@ -92,19 +92,20 @@ public class AlumnoDAOImplementacion implements AlumnoDAO {
             e.printStackTrace();
             return false;
         }
-        return false;
     }
 
     @Override
-    public void eliminarAlumno(String id) {
+    public boolean eliminarAlumno(String id) {
 
         String sql = "DELETE FROM alumno WHERE cod_alumno = ?";
         try (Connection connection = dataSource.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, id);
             statement.executeUpdate();
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
